@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identity.Domain.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210522223644_Initial")]
+    [Migration("20210523010330_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -201,19 +201,9 @@ namespace Identity.Domain.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RoleId1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("RoleId1");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("AspNetUserRoles");
                 });
@@ -266,25 +256,17 @@ namespace Identity.Domain.Migrations
 
             modelBuilder.Entity("Identity.Domain.Model.UserRole", b =>
                 {
-                    b.HasOne("Identity.Domain.Model.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Identity.Domain.Model.Role", "Role")
                         .WithMany("UsersRoles")
-                        .HasForeignKey("RoleId1");
-
-                    b.HasOne("Identity.Domain.Model.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Identity.Domain.Model.User", "User")
                         .WithMany("UsersRoles")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Role");
 
