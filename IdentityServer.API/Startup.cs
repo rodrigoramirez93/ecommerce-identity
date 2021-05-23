@@ -110,6 +110,8 @@ namespace IdentityServer.API
             services.AddScoped<IContextService, ContextService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddTransient<IJwtService, JwtService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
 
             services.AddAuth(_appsettings.JwtSettings);
 
