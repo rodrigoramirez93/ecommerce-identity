@@ -64,7 +64,7 @@ namespace IdentityServer.API
 
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(_appsettings.ConnectionStrings.DefaultConnectionString);
+                options.UseSqlServer(_appsettings.ConnectionStrings.Identity);
             }, ServiceLifetime.Scoped);
 
             services.AddIdentity<User, Role>(options =>
