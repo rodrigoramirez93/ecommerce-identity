@@ -1,9 +1,5 @@
-﻿using Identity.Core;
-using Identity.Core.Constants;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Identity;
+using static Identity.Core.Constants;
 
 namespace Identity.Domain.Model
 {

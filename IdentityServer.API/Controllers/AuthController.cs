@@ -1,5 +1,6 @@
 ﻿using Identity.BusinessLogic.Interfaces;
 using Identity.Core.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net;
@@ -7,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace IdentityServer.API.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
+    [AllowAnonymous]
     public class AuthController : Controller
     {
         private readonly ILogger<AuthController> _logger;

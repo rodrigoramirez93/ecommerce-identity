@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Identity.Domain.Model
+namespace Identity.Core
 {
     public partial class Appsettings
     {

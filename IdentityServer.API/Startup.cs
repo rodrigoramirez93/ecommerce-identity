@@ -1,7 +1,14 @@
+using AutoMapper;
 using Identity.BusinessLogic.Interfaces;
 using Identity.BusinessLogic.Services;
+using Identity.Core;
+using Identity.Core.Filters;
+using Identity.Core.Helpers;
+using Identity.Core.Middleware;
 using Identity.Domain;
+using Identity.Domain.Mappings;
 using Identity.Domain.Model;
+using IdentityServer.API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Reflection;
 
 namespace IdentityServer.API
 {
@@ -67,6 +75,25 @@ namespace IdentityServer.API
                 options.UseSqlServer(_appsettings.ConnectionStrings.Identity);
             }, ServiceLifetime.Scoped);
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "default",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                                  });
+            });
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddMaps(Assembly.GetAssembly(typeof(UserProfile)));
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddIdentity<User, Role>(options =>
             {
                 options.Password.RequiredLength = 8;
@@ -83,6 +110,13 @@ namespace IdentityServer.API
             services.AddScoped<IContextService, ContextService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddTransient<IJwtService, JwtService>();
+
+            services.AddAuth(_appsettings.JwtSettings);
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(AuthorizationFilter));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,7 +137,9 @@ namespace IdentityServer.API
 
             app.UseCors("default");
 
-            app.UseAuthorization();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            app.UseAuth();
 
             app.UseEndpoints(endpoints =>
             {

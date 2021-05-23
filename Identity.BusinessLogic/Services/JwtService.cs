@@ -1,4 +1,5 @@
 ﻿using Identity.BusinessLogic.Interfaces;
+using Identity.Core;
 using Identity.Core.Dto;
 using Identity.Domain.Model;
 using Microsoft.Extensions.Options;
