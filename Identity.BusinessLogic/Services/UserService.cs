@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Identity.BusinessLogic.Interfaces;
 using Identity.Core.Dto;
+using Identity.Domain.Extensions;
 using Identity.Domain.Filters;
 using Identity.Domain.Model;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +35,7 @@ namespace Identity.BusinessLogic.Services
         public async Task<IdentityResult> CreateAsync(SignUpDto signUpDto)
         {
             var user = _mapper.Map<SignUpDto, User>(signUpDto);
+            user.SetAuditInformationCreate(1);
             return await _userManager.CreateAsync(user, signUpDto.Password);
         }
 

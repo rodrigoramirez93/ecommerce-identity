@@ -1,8 +1,10 @@
 ﻿using Identity.BusinessLogic.Interfaces;
 using Identity.Core;
 using Identity.Core.Dto;
+using Identity.Domain.Extensions;
 using Identity.Domain.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,18 +20,18 @@ namespace Identity.BusinessLogic.Services
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly IJwtService _jwtService;
-        private readonly IContextService _contextService;
+        private readonly IUnitOfWork _unitOfWork;
 
         public LoginService(
             UserManager<User> userManager,
             RoleManager<Role> roleManager,
             IJwtService jwtService,
-            IContextService contextService)
+            IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _jwtService = jwtService;
-            _contextService = contextService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<TokenDtoResponse> GetToken(SignInDto signInDto)
@@ -60,21 +62,12 @@ namespace Identity.BusinessLogic.Services
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
 
-            var rolesNames = await _userManager.GetRolesAsync(user);
-            var rolesIds = _roleManager.Roles.Where(role => rolesNames.Contains(role.Name)).Select(x => x.Id).ToList();
-            var roleClaims = new List<RoleClaim>();
-
-            _contextService.Do((context) =>
-            {
-                roleClaims = context.RoleClaims.Where(x => rolesIds.Contains(x.RoleId)).ToList();
-            });
-
-            var userClaims = roleClaims.Select(claim => new Claim(claim.ClaimType, claim.ClaimValue)).ToList();
+            var userClaims = _userManager.Users.GetUserClaims(user.Id);
 
             claims.AddRange(userClaims);
 
             var token = _jwtService.GenerateJwt(user, claims);
-            return new TokenDtoResponse(token, HttpStatusCode.OK);
+            return new TokenDtoResponse(null, HttpStatusCode.OK);
         }
     }
 }

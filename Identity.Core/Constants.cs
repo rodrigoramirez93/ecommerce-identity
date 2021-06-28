@@ -6,6 +6,19 @@ namespace Identity.Core
 {
     public static class Constants
     {
+        public static class Tables
+        {
+            public static string Role = "Role";
+            public static string RoleClaim = "RoleClaim";
+            public static string User = "User";
+            public static string UserClaim = "UserClaim";
+            public static string UserLogin = "UserLogin";
+            public static string UserToken = "UserToken";
+            public static string UserRole = "UserRole";
+
+            public static string Tenant = "Tenant";
+        }
+
         public static class Claims
         {
             public static Dictionary<string, string> All { get { return GetAllClaims(); } }
@@ -13,25 +26,25 @@ namespace Identity.Core
             private static Dictionary<string, string> GetAllClaims()
             {
                 return new Dictionary<string, string>(new List<KeyValuePair<string, string>>()
-            {
-                CREATE_PRODUCT,
-                READ_PRODUCT,
-                UPDATE_PRODUCT,
-                DELETE_PRODUCT,
+                {
+                    CREATE_PRODUCT,
+                    READ_PRODUCT,
+                    UPDATE_PRODUCT,
+                    DELETE_PRODUCT,
 
-                CREATE_ROLE,
-                READ_ROLE,
-                READ_CLAIMS,
-                UPDATE_ROLE,
-                DELETE_ROLE,
-                ADD_CLAIM_TO_ROLE,
-                REMOVE_CLAIM_TO_ROLE,
+                    CREATE_ROLE,
+                    READ_ROLE,
+                    READ_CLAIMS,
+                    UPDATE_ROLE,
+                    DELETE_ROLE,
+                    ADD_CLAIM_TO_ROLE,
+                    REMOVE_CLAIM_TO_ROLE,
 
-                READ_USERS,
-                CREATE_USERS,
-                UPDATE_USERS,
-                DELETE_USERS
-            });
+                    READ_USERS,
+                    CREATE_USERS,
+                    UPDATE_USERS,
+                    DELETE_USERS
+                });
             }
 
             public const string CAN_CREATE_PRODUCT = "CAN_CREATE_PRODUCT";

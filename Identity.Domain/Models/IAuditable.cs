@@ -1,12 +1,10 @@
-﻿using Identity.Domain.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Identity.Domain.Model
+namespace Identity.Domain.Models
 {
-    public class UserToken : IdentityUserToken<int>, IAuditable
+    public interface IAuditable
     {
         public DateTime? DateCreated { get; set; }
         public int CreatedBy { get; set; }

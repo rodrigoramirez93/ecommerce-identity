@@ -6,7 +6,6 @@ namespace Identity.Core.Dto
 {
     public class TokenDto
     {
-
         public TokenDto(string idToken, DateTime expirationDate, UserDto user)
         {
             IdToken = idToken;

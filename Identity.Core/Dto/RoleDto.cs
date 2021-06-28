@@ -19,6 +19,7 @@ namespace Identity.Core.Dto
     public class CreateRoleDto
     {
         public string Name { get; set; }
+        public int TenantId { get; set; }
     }
 
     public class AccessDto

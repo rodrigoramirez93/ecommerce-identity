@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Identity.Domain.Models;
+using Microsoft.AspNetCore.Identity;
+using System;
 using static Identity.Core.Constants;
 
 namespace Identity.Domain.Model
 {
-    public class RoleClaim : IdentityRoleClaim<int>
+    public class RoleClaim : IdentityRoleClaim<int>, IAuditable
     {
         public string Description
         {
@@ -14,5 +16,13 @@ namespace Identity.Domain.Model
             }
             set { }
         }
+
+        public DateTime? DateCreated { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime? DateUpdated { get; set; }
+        public int? UpdatedBy { get; set; }
+        public DateTime? DateDeleted { get; set; }
+        public int? DeletedBy { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

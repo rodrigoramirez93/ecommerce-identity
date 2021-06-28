@@ -8,6 +8,7 @@ using Identity.Core.Middleware;
 using Identity.Domain;
 using Identity.Domain.Mappings;
 using Identity.Domain.Model;
+using Identity.Domain.Models;
 using IdentityServer.API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -107,11 +108,14 @@ namespace IdentityServer.API
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IContextService, ContextService>();
-            services.AddScoped<ILoginService, LoginService>();
             services.AddTransient<IJwtService, JwtService>();
+            services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ITenantService, TenantService>();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAuth(_appsettings.JwtSettings);
 
