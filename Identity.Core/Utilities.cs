@@ -5,17 +5,17 @@ using System.Text;
 namespace Identity.Core
 {
 
-    public class Decrypt
+    public class Decode
     {
         private string _string;
         private byte[] _stringDecrypted;
 
-        public Decrypt(string str)
+        public Decode(string str)
         {
             _string = str;
         }
 
-        public Decrypt FromBase64String()
+        public Decode FromBase64String()
         {
             _stringDecrypted = Convert.FromBase64String(_string);
             return this;

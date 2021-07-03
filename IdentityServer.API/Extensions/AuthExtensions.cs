@@ -18,24 +18,25 @@ namespace IdentityServer.API.Extensions
                 .AddAuthorization(options =>
                 {
                     //product
-                    options.AddPolicy(Claims.CAN_CREATE_PRODUCT, policy => policy.RequireClaim(Claims.CAN_CREATE_PRODUCT, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_DELETE_PRODUCT, policy => policy.RequireClaim(Claims.CAN_CREATE_PRODUCT, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_READ_PRODUCT, policy => policy.RequireClaim(Claims.CAN_READ_PRODUCT, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_UPDATE_PRODUCT, policy => policy.RequireClaim(Claims.CAN_UPDATE_PRODUCT, bool.TrueString));
+                    options.AddPolicy(Claims.CAN_CREATE_PRODUCT, policy => policy.RequireClaim(Claims.CAN_CREATE_PRODUCT, "true"));
+                    options.AddPolicy(Claims.CAN_DELETE_PRODUCT, policy => policy.RequireClaim(Claims.CAN_CREATE_PRODUCT, "true"));
+                    options.AddPolicy(Claims.CAN_READ_PRODUCT, policy => policy.RequireClaim(Claims.CAN_READ_PRODUCT, "true"));
+                    options.AddPolicy(Claims.CAN_UPDATE_PRODUCT, policy => policy.RequireClaim(Claims.CAN_UPDATE_PRODUCT, "true"));
                     //role
-                    options.AddPolicy(Claims.CAN_CREATE_ROLE, policy => policy.RequireClaim(Claims.CAN_CREATE_ROLE, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_READ_ROLE, policy => policy.RequireClaim(Claims.CAN_READ_ROLE, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_UPDATE_ROLE, policy => policy.RequireClaim(Claims.CAN_UPDATE_ROLE, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_DELETE_ROLE, policy => policy.RequireClaim(Claims.CAN_DELETE_ROLE, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_ADD_CLAIM_TO_ROLE, policy => policy.RequireClaim(Claims.CAN_ADD_CLAIM_TO_ROLE, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_REMOVE_CLAIM_TO_ROLE, policy => policy.RequireClaim(Claims.CAN_REMOVE_CLAIM_TO_ROLE, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_READ_CLAIMS, policy => policy.RequireClaim(Claims.CAN_READ_CLAIMS, bool.TrueString));
+                    options.AddPolicy(Claims.CAN_CREATE_ROLE, policy => policy.RequireClaim(Claims.CAN_CREATE_ROLE, "true"));
+                    options.AddPolicy(Claims.CAN_READ_ROLE, policy => policy.RequireClaim(Claims.CAN_READ_ROLE, "true"));
+                    options.AddPolicy(Claims.CAN_UPDATE_ROLE, policy => policy.RequireClaim(Claims.CAN_UPDATE_ROLE, "true"));
+                    options.AddPolicy(Claims.CAN_DELETE_ROLE, policy => policy.RequireClaim(Claims.CAN_DELETE_ROLE, "true"));
+                    options.AddPolicy(Claims.CAN_ADD_CLAIM_TO_ROLE, policy => policy.RequireClaim(Claims.CAN_ADD_CLAIM_TO_ROLE, "true"));
+                    options.AddPolicy(Claims.CAN_REMOVE_CLAIM_TO_ROLE, policy => policy.RequireClaim(Claims.CAN_REMOVE_CLAIM_TO_ROLE, "true"));
+                    options.AddPolicy(Claims.CAN_READ_CLAIMS, policy => policy.RequireClaim(Claims.CAN_READ_CLAIMS, "true"));
                     //users
-                    options.AddPolicy(Claims.CAN_READ_USERS, policy => policy.RequireClaim(Claims.CAN_READ_USERS, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_CREATE_USERS, policy => policy.RequireClaim(Claims.CAN_CREATE_USERS, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_UPDATE_USERS, policy => policy.RequireClaim(Claims.CAN_UPDATE_USERS, bool.TrueString));
-                    options.AddPolicy(Claims.CAN_DELETE_USERS, policy => policy.RequireClaim(Claims.CAN_DELETE_USERS, bool.TrueString));
-
+                    options.AddPolicy(Claims.CAN_READ_USERS, policy => policy.RequireClaim(Claims.CAN_READ_USERS, "true"));
+                    options.AddPolicy(Claims.CAN_CREATE_USERS, policy => policy.RequireClaim(Claims.CAN_CREATE_USERS, "true"));
+                    options.AddPolicy(Claims.CAN_UPDATE_USERS, policy => policy.RequireClaim(Claims.CAN_UPDATE_USERS, "true"));
+                    options.AddPolicy(Claims.CAN_DELETE_USERS, policy => policy.RequireClaim(Claims.CAN_DELETE_USERS, "true"));
+                    //tenants
+                    options.AddPolicy(Claims.CAN_READ_TENANT, policy => policy.RequireClaim(Claims.CAN_READ_TENANT, "true"));
                 })
 
                 .AddAuthentication(options =>

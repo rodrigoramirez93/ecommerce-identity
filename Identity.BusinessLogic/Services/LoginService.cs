@@ -18,32 +18,30 @@ namespace Identity.BusinessLogic.Services
     public class LoginService : ILoginService
     {
         private readonly UserManager<User> _userManager;
-        private readonly RoleManager<Role> _roleManager;
         private readonly IJwtService _jwtService;
-        private readonly IUnitOfWork _unitOfWork;
 
         public LoginService(
             UserManager<User> userManager,
-            RoleManager<Role> roleManager,
-            IJwtService jwtService,
-            IUnitOfWork unitOfWork)
+            IJwtService jwtService)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
             _jwtService = jwtService;
-            _unitOfWork = unitOfWork;
         }
 
         public async Task<TokenDtoResponse> GetToken(SignInDto signInDto)
         {
-            var user = _userManager.Users.SingleOrDefault(u => u.UserName == signInDto.Email);
+            var user = _userManager
+                .Users
+                .Include(x => x.UsersTenants)
+                    .ThenInclude(y => y.Tenant)
+                .SingleOrDefault(u => u.UserName == signInDto.Email);
 
-            if (user is null)
+            if (user == null)
             {
                 return new TokenDtoResponse(null, HttpStatusCode.NotFound);
             }
 
-            var pass = new Decrypt(signInDto.Password)
+            var pass = new Decode(signInDto.Password)
                 .FromBase64String()
                 .Solve();
 
@@ -54,7 +52,7 @@ namespace Identity.BusinessLogic.Services
                 return new TokenDtoResponse(null, HttpStatusCode.BadRequest);
             }
 
-            var claims = new List<Claim>
+            var baseClaims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName),
@@ -63,11 +61,12 @@ namespace Identity.BusinessLogic.Services
             };
 
             var userClaims = _userManager.Users.GetUserClaims(user.Id);
+            var tenantClaims = user.GetUserTenants().ToClaim().ToList();
 
-            claims.AddRange(userClaims);
+            var claims = baseClaims.Concat(userClaims).Concat(tenantClaims).ToList();
 
             var token = _jwtService.GenerateJwt(user, claims);
-            return new TokenDtoResponse(null, HttpStatusCode.OK);
+            return new TokenDtoResponse(token, HttpStatusCode.OK);
         }
     }
 }

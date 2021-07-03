@@ -2,7 +2,6 @@ using AutoMapper;
 using Identity.BusinessLogic.Interfaces;
 using Identity.BusinessLogic.Services;
 using Identity.Core;
-using Identity.Core.Filters;
 using Identity.Core.Helpers;
 using Identity.Core.Middleware;
 using Identity.Domain;
@@ -10,6 +9,7 @@ using Identity.Domain.Mappings;
 using Identity.Domain.Model;
 using Identity.Domain.Models;
 using IdentityServer.API.Extensions;
+using IdentityServer.API.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -113,7 +113,7 @@ namespace IdentityServer.API
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ITenantService, TenantService>();
-
+            services.AddScoped<ILoggedUserService, LoggedUserService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

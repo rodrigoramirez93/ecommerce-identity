@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Identity.Domain.Model
 {
-    public class User : IdentityUser<int>, IAuditable, ITrackable
+    public class User : IdentityUser<int>, IAuditable
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
@@ -15,9 +15,8 @@ namespace Identity.Domain.Model
         public int CreatedBy { get; set; }
         public DateTime? DateUpdated { get; set; }
         public int? UpdatedBy { get; set; }
-        public int TenantId { get; set; }
-        public Tenant Tenant { get; set; }
         public DateTime? DateDeleted { get; set; }
         public int? DeletedBy { get; set; }
+        public ICollection<UserTenant> UsersTenants { get; set; }
     }
 }

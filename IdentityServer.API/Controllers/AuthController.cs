@@ -10,7 +10,7 @@ namespace IdentityServer.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [AllowAnonymous]
+    [Authorize]
     public class AuthController : Controller
     {
         private readonly ILogger<AuthController> _logger;
@@ -25,6 +25,7 @@ namespace IdentityServer.API.Controllers
         }
 
         [HttpPost("SignIn")]
+        [AllowAnonymous]
         public async Task<IActionResult> SignIn([FromBody]SignInDto signInDto)
         {
             var response = await _loginService.GetToken(signInDto);

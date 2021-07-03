@@ -11,10 +11,10 @@ namespace Identity.BusinessLogic.Interfaces
     {
         Task<List<ReadRoleDto>> GetAsync();
         Task<ReadRoleDto> GetByIdAsync(int roleId);
-        Task<IdentityResult> UpdateAsync(string roleId, UpdateRoleDto roleDto);
+        Task<IdentityResult> UpdateAsync(int roleId, UpdateRoleDto roleDto);
         Task<IdentityResult> CreateAsync(CreateRoleDto roleDto);
-        Task<IdentityResult> AddClaimToRoleAsync(string roleId, AccessDto claimDto);
-        Task<IdentityResult> RemoveClaimFromRoleAsync(string roleId, string claimType);
+        Task<IdentityResult> AddClaimToRoleAsync(int roleId, AccessDto claimDto);
+        Task<IdentityResult> RemoveClaimFromRoleAsync(int roleId, string claimType);
         Task<IdentityResult> DeleteAsync(int roleId);
         List<AccessDto> GetAccessClaims();
     }

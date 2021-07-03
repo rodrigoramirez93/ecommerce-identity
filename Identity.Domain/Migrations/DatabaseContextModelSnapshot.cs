@@ -84,28 +84,10 @@ namespace Identity.Domain.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateDeleted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("DeletedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -183,9 +165,6 @@ namespace Identity.Domain.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TenantId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -205,8 +184,6 @@ namespace Identity.Domain.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("TenantId");
 
                     b.ToTable("User");
                 });
@@ -394,6 +371,21 @@ namespace Identity.Domain.Migrations
                     b.ToTable("Tenant");
                 });
 
+            modelBuilder.Entity("Identity.Domain.Models.UserTenant", b =>
+                {
+                    b.Property<int>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TenantId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTenant");
+                });
+
             modelBuilder.Entity("Identity.Domain.Model.Role", b =>
                 {
                     b.HasOne("Identity.Domain.Models.Tenant", "Tenant")
@@ -405,18 +397,9 @@ namespace Identity.Domain.Migrations
 
             modelBuilder.Entity("Identity.Domain.Model.RoleClaim", b =>
                 {
-                    b.HasOne("Identity.Domain.Model.Role", null)
-                        .WithMany()
+                    b.HasOne("Identity.Domain.Model.Role", "Role")
+                        .WithMany("RoleClaims")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Identity.Domain.Model.User", b =>
-                {
-                    b.HasOne("Identity.Domain.Models.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -458,6 +441,21 @@ namespace Identity.Domain.Migrations
                 {
                     b.HasOne("Identity.Domain.Model.User", null)
                         .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Identity.Domain.Models.UserTenant", b =>
+                {
+                    b.HasOne("Identity.Domain.Models.Tenant", "Tenant")
+                        .WithMany("UsersTenants")
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Identity.Domain.Model.User", "User")
+                        .WithMany("UsersTenants")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

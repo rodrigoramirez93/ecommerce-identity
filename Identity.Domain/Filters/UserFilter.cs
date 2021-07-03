@@ -6,18 +6,14 @@ using System.Text;
 
 namespace Identity.Domain.Filters
 {
-    public class UserFilter
+    public class UserFilter : SearchFilter<User>
     {
-        private IQueryable<User> _query;
-        public UserFilter(IQueryable<User> query)
-        {
-            _query = query;
-        }
+        public UserFilter(IQueryable<User> query) : base(query) { }
 
         public UserFilter HasId(int id)
         {
             if (id != default)
-                _query = _query.Where(user => user.Id == id);
+                Query = Query.Where(user => user.Id == id);
 
             return this;
         }
@@ -25,7 +21,7 @@ namespace Identity.Domain.Filters
         public UserFilter HasFirstName(string firstName)
         {
             if (!string.IsNullOrWhiteSpace(firstName))
-                _query = _query.Where(
+                Query = Query.Where(
                     user => user.Firstname
                         .ToLower()
                         .Contains(firstName)
@@ -37,7 +33,7 @@ namespace Identity.Domain.Filters
         public UserFilter HasLastName(string lastName)
         {
             if (!string.IsNullOrWhiteSpace(lastName))
-                _query = _query.Where(
+                Query = Query.Where(
                     user => user.Lastname
                         .ToLower()
                         .Contains(lastName)
@@ -46,6 +42,6 @@ namespace Identity.Domain.Filters
             return this;
         }
 
-        public IQueryable<User> GetQuery() => _query;
+        public IQueryable<User> GetQuery() => Query;
     }
 }

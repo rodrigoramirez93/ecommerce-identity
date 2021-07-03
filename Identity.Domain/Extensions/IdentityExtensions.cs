@@ -1,4 +1,5 @@
 ﻿using Identity.Domain.Model;
+using Identity.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,28 @@ namespace Identity.Domain.Extensions
             return roleClaims
                 .Select(claims => new Claim(claims.ClaimType, claims.ClaimValue))
                 .ToList();
+        }
+
+        public static bool HasClaim(this IQueryable<Role> role, string claimName)
+        {
+            var roleClaims = role
+                .Include(x => x.RoleClaims)
+                .Select(y => y.RoleClaims)
+                .ToList();
+
+            return roleClaims.Where(x => x.Any(y => y.ClaimType.Contains(claimName))).Count() > 0;
+        }
+
+        public static IEnumerable<Tenant> GetUserTenants(this User user)
+        {
+            return user.UsersTenants.Select(x => x.Tenant).ToList();
+        }
+
+        public static IEnumerable<Claim> ToClaim(this IEnumerable<Tenant> tenants)
+        {
+            return tenants
+                .Select(tenant => 
+                    new Claim(type: "Tenant", value: $"{tenant.Id}"));
         }
     }
 }

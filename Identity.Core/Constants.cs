@@ -17,10 +17,13 @@ namespace Identity.Core
             public static string UserRole = "UserRole";
 
             public static string Tenant = "Tenant";
+            public static string UserTenant = "UserTenant";
         }
 
         public static class Claims
         {
+            public static string Tenant = "Tenant";
+
             public static Dictionary<string, string> All { get { return GetAllClaims(); } }
 
             private static Dictionary<string, string> GetAllClaims()
@@ -67,6 +70,9 @@ namespace Identity.Core
             public const string CAN_UPDATE_USERS = "CAN_UPDATE_USERS";
             public const string CAN_DELETE_USERS = "CAN_DELETE_USERS";
 
+            //tenant
+            public const string CAN_READ_TENANT = "CAN_READ_TENANT";
+
             //product
             public static KeyValuePair<string, string> CREATE_PRODUCT = new KeyValuePair<string, string>(CAN_CREATE_PRODUCT, "Create products");
             public static KeyValuePair<string, string> READ_PRODUCT = new KeyValuePair<string, string>(CAN_READ_PRODUCT, "Read products");
@@ -99,7 +105,8 @@ namespace Identity.Core
             Product,
             Products,
             Role,
-            Roles
+            Roles,
+            Tenants
         }
 
         public enum PropertyNames

@@ -52,7 +52,6 @@ namespace Identity.Domain.DbConfigs
         }
     }
 
-
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)

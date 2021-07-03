@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20210627232254_AddedRoleClaimNavigationProperty.Designer.cs" />
     <Compile Remove="Migrations\20210627232513_AddedRoleClaimNavigationProperty.cs" />
     <Compile Remove="Migrations\20210627232513_AddedRoleClaimNavigationProperty.Designer.cs" />
+    <Compile Remove="Migrations\20210702211358_UserTenantChanges.cs" />
+    <Compile Remove="Migrations\20210702211358_UserTenantChanges.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

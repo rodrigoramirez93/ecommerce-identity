@@ -11,8 +11,7 @@ namespace IdentityServer.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize]
-    [AllowAnonymous]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
@@ -27,7 +26,7 @@ namespace IdentityServer.API.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Policy = Claims.CAN_READ_USERS)]
+        [Authorize(Policy = Claims.CAN_READ_USERS)]
         public async Task<IActionResult> Get(string id, string firstName, string lastName)
         {
             return new OkObjectResult(
@@ -36,7 +35,7 @@ namespace IdentityServer.API.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Policy = Claims.CAN_CREATE_USERS)]
+        [Authorize(Policy = Claims.CAN_CREATE_USERS)]
         public async Task<IActionResult> Post(SignUpDto signUpDto)
         {
             var response = await _userService.CreateAsync(signUpDto);
@@ -47,13 +46,13 @@ namespace IdentityServer.API.Controllers
         }
 
         [HttpPut("{id}")]
-        //[Authorize(Policy = Claims.CAN_UPDATE_USERS)]
+        [Authorize(Policy = Claims.CAN_UPDATE_USERS)]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Policy = Claims.CAN_DELETE_USERS)]
+        [Authorize(Policy = Claims.CAN_DELETE_USERS)]
         public void Delete(int id)
         {
         }

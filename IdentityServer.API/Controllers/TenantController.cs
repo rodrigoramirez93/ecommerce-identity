@@ -6,13 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Identity.Core.Constants;
 
 namespace IdentityServer.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize]
-    [AllowAnonymous]
+    [Authorize]
     public class TenantController : Controller
     {
         private readonly ITenantService _tenantService;
@@ -22,7 +22,7 @@ namespace IdentityServer.API.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Policy = Claims.CAN_READ_ROLE)]
+        [Authorize(Policy = Claims.CAN_READ_TENANT)]
         public async Task<IActionResult> CreateTenant(TenantDto tenantDto)
         {
             await _tenantService.Create(tenantDto);
