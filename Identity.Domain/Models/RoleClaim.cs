@@ -1,7 +1,5 @@
-﻿using Identity.Domain.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
-using static Identity.Core.Constants;
+﻿using Microsoft.AspNetCore.Identity;
+using static Shared.Infrastructure.Core.Constants;
 
 namespace Identity.Domain.Model
 {

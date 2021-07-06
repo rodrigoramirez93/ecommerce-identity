@@ -2,11 +2,8 @@
 using Identity.Core.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using static Identity.Core.Constants;
+using static Shared.Infrastructure.Core.Constants;
 
 namespace IdentityServer.API.Controllers
 {

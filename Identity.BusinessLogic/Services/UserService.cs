@@ -5,6 +5,8 @@ using Identity.Domain.Extensions;
 using Identity.Domain.Filters;
 using Identity.Domain.Model;
 using Identity.Domain.Models;
+using Infrastructure.Interfaces;
+using Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;

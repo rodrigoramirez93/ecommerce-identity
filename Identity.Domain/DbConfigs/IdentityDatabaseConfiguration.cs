@@ -1,7 +1,7 @@
 ﻿using Identity.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using static Identity.Core.Constants;
+using static Shared.Infrastructure.Core.Constants;
 
 namespace Identity.Domain.DbConfigs
 {

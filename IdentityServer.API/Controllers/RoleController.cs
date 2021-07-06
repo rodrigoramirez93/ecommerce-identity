@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using static Identity.Core.Constants;
+using static Shared.Infrastructure.Core.Constants;
 
 namespace IdentityServer.API.Controllers
 {
