@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.BusinessLogic", "I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencies", "dependencies", "{90204CDB-E0E0-44AC-A7F3-0BEF74AE9F6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Infrastructure", "..\ecommerce-shared\Shared\Infrastructure\Shared.Infrastructure.csproj", "{CADED8A0-9E52-49F5-B7CC-0E4BDC94FE00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Infrastructure", "..\ecommerce-shared\Infrastructure\Shared.Infrastructure.csproj", "{CADED8A0-9E52-49F5-B7CC-0E4BDC94FE00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
