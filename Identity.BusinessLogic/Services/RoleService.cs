@@ -1,22 +1,18 @@
 ﻿using AutoMapper;
 using Identity.BusinessLogic.Interfaces;
-using Identity.Core;
 using Identity.Core.Dto;
-using Identity.Core.Exceptions;
 using Identity.Core.Helpers;
 using Identity.Domain.Extensions;
 using Identity.Domain.Model;
-using Identity.Domain.Models;
 using Infrastructure.Interfaces;
 using Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shared.Infrastructure.Core;
-using System;
+using Shared.Infrastructure.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Identity.BusinessLogic.Services

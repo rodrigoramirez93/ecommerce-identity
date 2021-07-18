@@ -1,6 +1,7 @@
 ﻿using Identity.Domain.Extensions;
 using Identity.Domain.Model;
 using Identity.Domain.Models;
+using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -5,6 +5,7 @@ using Identity.Domain.Extensions;
 using Identity.Domain.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Shared.Infrastructure.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;

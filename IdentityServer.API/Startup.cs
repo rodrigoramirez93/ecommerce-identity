@@ -2,7 +2,6 @@ using AutoMapper;
 using Identity.BusinessLogic.Interfaces;
 using Identity.BusinessLogic.Services;
 using Identity.Core;
-using Identity.Core.Middleware;
 using Identity.Domain;
 using Identity.Domain.Mappings;
 using Identity.Domain.Model;
@@ -17,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Shared.Infrastructure.Filters;
+using Shared.Infrastructure.Middleware;
 using System;
 using System.Reflection;
 

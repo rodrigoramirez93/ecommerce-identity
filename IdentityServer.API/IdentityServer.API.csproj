@@ -21,5 +21,9 @@
     <ProjectReference Include="..\Identity.BusinessLogic\Identity.BusinessLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 
 </Project>

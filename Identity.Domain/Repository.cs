@@ -1,6 +1,7 @@
-﻿using Identity.Core.Helpers;
-using Identity.Domain.Models;
+﻿using Infrastructure.Interfaces;
+using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
+using Shared.Infrastructure.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

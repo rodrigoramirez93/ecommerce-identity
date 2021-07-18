@@ -1,4 +1,5 @@
 ﻿using Identity.Domain.Models;
+using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

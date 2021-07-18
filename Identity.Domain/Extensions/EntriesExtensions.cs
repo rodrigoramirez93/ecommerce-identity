@@ -1,8 +1,7 @@
-﻿using Identity.Domain.Models;
+﻿using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Identity.Domain.Extensions
 {

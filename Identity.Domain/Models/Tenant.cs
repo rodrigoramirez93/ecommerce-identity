@@ -1,7 +1,7 @@
-﻿using Identity.Domain.Model;
+﻿using Infrastructure.Interfaces;
+using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Identity.Domain.Models
 {

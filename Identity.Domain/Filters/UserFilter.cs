@@ -1,8 +1,6 @@
 ﻿using Identity.Domain.Model;
-using System;
-using System.Collections.Generic;
+using Shared.Infrastructure.Utilities;
 using System.Linq;
-using System.Text;
 
 namespace Identity.Domain.Filters
 {

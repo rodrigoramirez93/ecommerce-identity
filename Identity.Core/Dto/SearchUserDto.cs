@@ -1,7 +1,4 @@
-﻿using Identity.Core.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Shared.Infrastructure.Utilities;
 
 namespace Identity.Core.Dto
 {

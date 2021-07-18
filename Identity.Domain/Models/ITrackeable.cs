@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Identity.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Identity.Domain.Models
+namespace Identity.Domain.Model
 {
     public interface ITrackable
     {
