@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ecommerce-shared\Shared\Infrastructure\Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\ecommerce-shared\Infrastructure\Shared.Infrastructure.csproj" />
     <ProjectReference Include="..\Identity.BusinessLogic\Identity.BusinessLogic.csproj" />
   </ItemGroup>
 
