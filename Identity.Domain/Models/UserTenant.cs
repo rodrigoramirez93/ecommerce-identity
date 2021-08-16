@@ -8,8 +8,10 @@ namespace Identity.Domain.Models
     public class UserTenant
     {
         public int TenantId { get; set; }
-        public Tenant Tenant { get; set; }
+        public virtual Tenant Tenant { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
+        public int RoleId { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

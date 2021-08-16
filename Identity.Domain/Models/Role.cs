@@ -19,5 +19,6 @@ namespace Identity.Domain.Model
         public int TenantId { get; set; }
         public virtual Tenant Tenant { get; set; }
         public virtual ICollection<RoleClaim> RoleClaims { get; set; }
+        public virtual ICollection<UserTenant> UsersTenants { get; set; }
     }
 }

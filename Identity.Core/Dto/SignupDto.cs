@@ -6,6 +6,8 @@ namespace Identity.Core.Dto
 {
     public class SignUpDto
     {
+        public string UserName { get; set; }
+
         public string Email { get; set; }
 
         public string FirstName { get; set; }

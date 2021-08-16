@@ -3,6 +3,8 @@ using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace Identity.Domain.Model
@@ -18,6 +20,6 @@ namespace Identity.Domain.Model
         public int? UpdatedBy { get; set; }
         public DateTime? DateDeleted { get; set; }
         public int? DeletedBy { get; set; }
-        public ICollection<UserTenant> UsersTenants { get; set; }
+        public IList<UserTenant> UsersTenants { get; set; }
     }
 }

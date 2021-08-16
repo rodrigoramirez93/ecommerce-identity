@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -35,8 +36,8 @@ namespace Identity.BusinessLogic.Services
             );
 
             var idToken = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return new TokenDto(idToken, expires, new UserDto(user.Id.ToString(), user.Firstname, user.Lastname));
+            var companyRoles = user.UsersTenants.Select(x => new TenantRoleDto(x.TenantId, x.Tenant.Name, x.RoleId, x.Role.Name));
+            return new TokenDto(idToken, expires, new UserDto(user.Id.ToString(), user.Firstname, user.Lastname, companyRoles.ToList()));
         }
     }
 }

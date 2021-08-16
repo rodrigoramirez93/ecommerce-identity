@@ -28,6 +28,11 @@ namespace Identity.Domain.DbConfigs
             builder.HasOne(x => x.Tenant)
                 .WithMany(x => x.UsersTenants)
                 .HasForeignKey(x => x.TenantId);
+
+            builder.HasOne(x => x.Role)
+                .WithMany(x => x.UsersTenants)
+                .HasForeignKey(x => x.RoleId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

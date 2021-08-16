@@ -63,7 +63,6 @@ namespace Identity.BusinessLogic.Services
 
             var userClaims = _userManager.Users.GetUserClaims(user.Id);
             var tenantClaims = user.GetUserTenants().ToClaim().ToList();
-
             var claims = baseClaims.Concat(userClaims).Concat(tenantClaims).ToList();
 
             var token = _jwtService.GenerateJwt(user, claims);
