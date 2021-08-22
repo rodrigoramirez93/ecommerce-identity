@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20210816202918_UserTenant_AddRole.Designer.cs" />
     <Compile Remove="Migrations\20210816203130_UserTenant_AddRole.cs" />
     <Compile Remove="Migrations\20210816203130_UserTenant_AddRole.Designer.cs" />
+    <Compile Remove="Migrations\20210822202035_default-tenant-id.cs" />
+    <Compile Remove="Migrations\20210822202035_default-tenant-id.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

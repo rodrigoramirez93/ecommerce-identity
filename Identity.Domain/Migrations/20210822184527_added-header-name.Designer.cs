@@ -4,14 +4,16 @@ using Identity.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Identity.Domain.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210822184527_added-header-name")]
+    partial class addedheadername
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,9 +125,6 @@ namespace Identity.Domain.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DefaultTenantId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("DeletedBy")
                         .HasColumnType("int");
 
@@ -179,8 +178,6 @@ namespace Identity.Domain.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DefaultTenantId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -415,13 +412,6 @@ namespace Identity.Domain.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Identity.Domain.Model.User", b =>
-                {
-                    b.HasOne("Identity.Domain.Models.Tenant", "DefaultTenant")
-                        .WithMany()
-                        .HasForeignKey("DefaultTenantId");
                 });
 
             modelBuilder.Entity("Identity.Domain.Model.UserClaim", b =>

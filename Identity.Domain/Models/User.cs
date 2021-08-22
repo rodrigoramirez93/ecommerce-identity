@@ -3,9 +3,6 @@ using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 
 namespace Identity.Domain.Model
 {
@@ -14,6 +11,8 @@ namespace Identity.Domain.Model
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public virtual IList<UserRole> UsersRoles { get; set; }
+        public int? DefaultTenantId { get; set; }
+        public Tenant DefaultTenant { get; set; }
         public DateTime? DateCreated { get; set; }
         public int CreatedBy { get; set; }
         public DateTime? DateUpdated { get; set; }

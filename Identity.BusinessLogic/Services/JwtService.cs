@@ -36,8 +36,8 @@ namespace Identity.BusinessLogic.Services
             );
 
             var idToken = new JwtSecurityTokenHandler().WriteToken(token);
-            var companyRoles = user.UsersTenants.Select(x => new TenantRoleDto(x.TenantId, x.Tenant.Name, x.RoleId, x.Role.Name));
-            return new TokenDto(idToken, expires, new UserDto(user.Id.ToString(), user.Firstname, user.Lastname, companyRoles.ToList()));
+            
+            return new TokenDto(idToken, expires, new UserDto(user.Id.ToString(), user.Firstname, user.Lastname));
         }
     }
 }

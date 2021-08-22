@@ -8,6 +8,7 @@ namespace Identity.Domain.Models
     public class Tenant : Entity, IAuditable 
     {
         public string Name { get; set; }
+        public Guid? HeaderName { get; set; }
         public DateTime? DateCreated { get; set; }
         public int CreatedBy { get; set; }
         public DateTime? DateUpdated { get; set; }

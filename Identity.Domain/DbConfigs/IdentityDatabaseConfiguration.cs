@@ -36,6 +36,14 @@ namespace Identity.Domain.DbConfigs
         }
     }
 
+    public class UserConfiguration : IEntityTypeConfiguration<User>
+    {
+        public void Configure(EntityTypeBuilder<User> builder)
+        {
+            builder.ToTable(Tables.User);
+        }
+    }
+
     public class RoleClaimconfiguration : IEntityTypeConfiguration<RoleClaim>
     {
         public void Configure(EntityTypeBuilder<RoleClaim> builder)
@@ -49,14 +57,6 @@ namespace Identity.Domain.DbConfigs
         public void Configure(EntityTypeBuilder<UserToken> builder)
         {
             builder.ToTable(Tables.UserToken);
-        }
-    }
-
-    public class UserConfiguration : IEntityTypeConfiguration<User>
-    {
-        public void Configure(EntityTypeBuilder<User> builder)
-        {
-            builder.ToTable(Tables.User);
         }
     }
 

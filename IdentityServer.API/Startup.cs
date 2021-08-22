@@ -14,11 +14,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using Shared.Infrastructure.Extensions;
 using Shared.Infrastructure.Filters;
 using Shared.Infrastructure.Middleware;
 using System;
 using System.Reflection;
+using System.Web.Http;
 
 namespace IdentityServer.API
 {
@@ -38,7 +40,11 @@ namespace IdentityServer.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Appsettings>(Configuration);
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -123,6 +129,8 @@ namespace IdentityServer.API
             {
                 options.Filters.Add(typeof(AuthorizationFilter));
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
