@@ -20,7 +20,6 @@ using Shared.Infrastructure.Filters;
 using Shared.Infrastructure.Middleware;
 using System;
 using System.Reflection;
-using System.Web.Http;
 
 namespace IdentityServer.API
 {
