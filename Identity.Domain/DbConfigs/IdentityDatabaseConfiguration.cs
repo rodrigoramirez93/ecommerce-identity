@@ -11,6 +11,8 @@ namespace Identity.Domain.DbConfigs
         {
             builder.ToTable(Tables.UserRole);
 
+            builder.HasKey(x => new { x.UserId, x.RoleId, x.TenantId });
+
             builder.HasOne(x => x.User)
                 .WithMany(x => x.UsersRoles)
                 .HasForeignKey(x => x.UserId)

@@ -11,7 +11,7 @@ namespace Identity.Domain.Mappings
             CreateMap<SignUpDto, User>();
             CreateMap<User, UserDto>()
                 .ConstructUsing(x => new UserDto(x.Id.ToString(), x.Firstname, x.Lastname))
-                .ForSourceMember(x => x.UsersTenants, y => y.DoNotValidate());
+                .ForSourceMember(x => x.UsersRoles, y => y.DoNotValidate());
         }
     }
 }

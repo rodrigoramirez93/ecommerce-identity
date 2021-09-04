@@ -12,27 +12,4 @@ namespace Identity.Domain.DbConfigs
             builder.ToTable(Tables.Tenant);
         }
     }
-
-    public class UserTenantConfiguration : IEntityTypeConfiguration<UserTenant>
-    {
-        public void Configure(EntityTypeBuilder<UserTenant> builder)
-        {
-            builder.ToTable(Tables.UserTenant);
-
-            builder.HasKey(x => new { x.TenantId, x.UserId });
-
-            builder.HasOne(x => x.User)
-                .WithMany(x => x.UsersTenants)
-                .HasForeignKey(x => x.UserId);
-
-            builder.HasOne(x => x.Tenant)
-                .WithMany(x => x.UsersTenants)
-                .HasForeignKey(x => x.TenantId);
-
-            builder.HasOne(x => x.Role)
-                .WithMany(x => x.UsersTenants)
-                .HasForeignKey(x => x.RoleId)
-                .OnDelete(DeleteBehavior.NoAction);
-        }
-    }
 }

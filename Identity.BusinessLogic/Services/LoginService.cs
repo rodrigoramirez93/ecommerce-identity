@@ -36,11 +36,11 @@ namespace Identity.BusinessLogic.Services
         {
             var user = _userManager
                 .Users
-                .Include(x => x.UsersTenants)
-                    .ThenInclude(y => y.Tenant)
-                .Include(x => x.UsersTenants)
-                    .ThenInclude(y => y.Role)
-                .SingleOrDefault(u => u.UserName == signInDto.Email);
+                    .Include(x => x.UsersRoles)
+                        .ThenInclude(y => y.Tenant)
+                    .Include(x => x.UsersRoles)
+                        .ThenInclude(y => y.Role)
+                    .SingleOrDefault(u => u.UserName == signInDto.Email);
 
             if (user == null)
             {
@@ -67,7 +67,7 @@ namespace Identity.BusinessLogic.Services
                 new Claim(Constants.Claims.DefaultTenantId, user.DefaultTenantId.ToString())
             };
 
-            var tenantInfo = user.UsersTenants.Select(x => new TenantRoleDto(x.TenantId, x.Tenant.Name, x.Tenant.HeaderName?.ToString() ?? "", x.RoleId, x.Role.Name));
+            var tenantInfo = user.UsersRoles.Select(x => new TenantRoleDto(x.Tenant.Id, x.Tenant.Name, x.Tenant.HeaderName?.ToString() ?? "", x.RoleId, x.Role.Name));
             var userTenantClaim = new Claim(Constants.Claims.Tenant, JsonConvert.SerializeObject(tenantInfo, new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()

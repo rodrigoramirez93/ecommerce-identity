@@ -39,7 +39,7 @@ namespace IdentityServer.API.Controllers
             return new OkObjectResult(await _roleService.GetByIdAsync(id));
         }
 
-        [HttpGet("Claims")]
+        [HttpGet("Claim")]
         [Authorize(Policy = Claims.CAN_READ_CLAIMS)]
         public IActionResult GetClaims()
         {

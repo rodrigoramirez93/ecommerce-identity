@@ -1,4 +1,5 @@
-﻿using Infrastructure.Interfaces;
+﻿using Identity.Domain.Model;
+using Infrastructure.Interfaces;
 using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,6 @@ namespace Identity.Domain.Models
         public int? UpdatedBy { get; set; }
         public DateTime? DateDeleted { get; set; }
         public int? DeletedBy { get; set; }
-        public ICollection<UserTenant> UsersTenants { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
     }
 }

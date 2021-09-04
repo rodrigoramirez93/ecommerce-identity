@@ -9,7 +9,6 @@ namespace Identity.Domain.Model
 {
     public class Role : IdentityRole<int>, IAuditable, ITrackable
     {
-        public virtual IList<UserRole> UsersRoles { get; set; }
         public DateTime? DateCreated { get; set; }
         public int CreatedBy { get; set; }
         public DateTime? DateUpdated { get; set; }
@@ -18,7 +17,7 @@ namespace Identity.Domain.Model
         public int? DeletedBy { get; set; }
         public int TenantId { get; set; }
         public virtual Tenant Tenant { get; set; }
-        public virtual ICollection<RoleClaim> RoleClaims { get; set; }
-        public virtual ICollection<UserTenant> UsersTenants { get; set; }
+        public virtual IList<UserRole> UsersRoles { get; set; }
+        public virtual IList<RoleClaim> RoleClaims { get; set; }
     }
 }

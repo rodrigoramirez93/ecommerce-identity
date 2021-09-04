@@ -135,6 +135,7 @@ namespace Identity.BusinessLogic.Services
             var roleToUpdate = await _roleManager.FindByIdAsync(roleId.ToString());
             roleToUpdate.MustExist(nameof(Constants.EntityNames.Role), roleId);
             roleToUpdate.Name = roleDto.Name;
+            roleToUpdate.TenantId = roleDto.TenantId;
             roleToUpdate.SetAuditInformationUpdate(_loggedUser.Id);
             return await _roleManager.UpdateAsync(roleToUpdate);
         }

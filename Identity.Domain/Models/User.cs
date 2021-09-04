@@ -10,7 +10,6 @@ namespace Identity.Domain.Model
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public virtual IList<UserRole> UsersRoles { get; set; }
         public int? DefaultTenantId { get; set; }
         public Tenant DefaultTenant { get; set; }
         public DateTime? DateCreated { get; set; }
@@ -19,6 +18,6 @@ namespace Identity.Domain.Model
         public int? UpdatedBy { get; set; }
         public DateTime? DateDeleted { get; set; }
         public int? DeletedBy { get; set; }
-        public IList<UserTenant> UsersTenants { get; set; }
+        public virtual IList<UserRole> UsersRoles { get; set; }
     }
 }

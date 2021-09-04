@@ -19,7 +19,7 @@ namespace IdentityServer.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = Claims.CAN_READ_TENANT)]
+        [Authorize(Policy = Claims.CAN_CREATE_TENANT)]
         public async Task<IActionResult> CreateTenant(TenantDto tenantDto)
         {
             await _tenantService.Create(tenantDto);
