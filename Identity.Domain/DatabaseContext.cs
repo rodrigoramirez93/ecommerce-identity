@@ -1,7 +1,9 @@
-﻿using Identity.Domain.Extensions;
+﻿using Identity.Core.Helpers;
+using Identity.Domain.Extensions;
 using Identity.Domain.Model;
 using Identity.Domain.Models;
 using Infrastructure.Interfaces;
+using Infrastructure.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,20 +16,26 @@ namespace Identity.Domain
 {
     public class DatabaseContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
-        public DatabaseContext()
-        {
+        private readonly ILoggedUserService _loggedUserService;
+        private readonly LoggedUser _loggedUser;
 
+        public DatabaseContext(ILoggedUserService loggedUserService)
+        {
+            _loggedUserService = loggedUserService;
+            _loggedUser = _loggedUserService.GetLoggedUser();
         }
 
-        public DatabaseContext(DbContextOptions options) : base(options)
+        public DatabaseContext(DbContextOptions options, ILoggedUserService loggedUserService) : base(options)
         {
-
+            _loggedUserService = loggedUserService;
+            _loggedUser = _loggedUserService.GetLoggedUser();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            ApplyQueryFilters(builder);
         }
 
         public DbSet<Tenant> Tenants { get; set; }
@@ -53,6 +61,19 @@ namespace Identity.Domain
             }
 
             return base.SaveChanges();
+        }
+
+        internal void ApplyQueryFilters(ModelBuilder modelBuilder)
+        {
+            var clrTypes = modelBuilder.Model.GetEntityTypes().Select(et => et.ClrType).ToList();
+
+            foreach (var type in clrTypes)
+            {
+                if (typeof(ITrackable).IsAssignableFrom(type))
+                    modelBuilder.Entity(type).AddQueryFilter<ITrackable>(e => e.Tenant.HeaderName == _loggedUser.ActiveTenant);
+                if (typeof(IAuditable).IsAssignableFrom(type))
+                    modelBuilder.Entity(type).AddQueryFilter<IAuditable>(e => e.DateDeleted == null);
+            }
         }
     }
 }

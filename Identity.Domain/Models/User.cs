@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 namespace Identity.Domain.Model
 {
-    public class User : IdentityUser<int>, IAuditable
+    public class User : IdentityUser<int>, IAuditable, ITrackable
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public int? DefaultTenantId { get; set; }
-        public Tenant DefaultTenant { get; set; }
+        public int TenantId { get; set; }
+        public Tenant Tenant { get; set; }
         public DateTime? DateCreated { get; set; }
         public int CreatedBy { get; set; }
         public DateTime? DateUpdated { get; set; }

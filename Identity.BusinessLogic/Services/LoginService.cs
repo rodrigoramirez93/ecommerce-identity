@@ -64,7 +64,7 @@ namespace Identity.BusinessLogic.Services
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(Constants.Claims.DefaultTenantId, user.DefaultTenantId.ToString())
+                new Claim(Constants.Claims.DefaultTenantId, user.TenantId.ToString())
             };
 
             var tenantInfo = user.UsersRoles.Select(x => new TenantRoleDto(x.Tenant.Id, x.Tenant.Name, x.Tenant.HeaderName?.ToString() ?? "", x.RoleId, x.Role.Name));

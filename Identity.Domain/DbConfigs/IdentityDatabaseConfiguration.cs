@@ -43,6 +43,8 @@ namespace Identity.Domain.DbConfigs
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable(Tables.User);
+
+            builder.Property(x => x.TenantId).HasColumnName("DefaultTenantId");
         }
     }
 

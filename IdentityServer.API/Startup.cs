@@ -76,9 +76,20 @@ namespace IdentityServer.API
                 });
             });
 
+            services.AddTransient<IJwtService, JwtService>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ITenantService, TenantService>();
+            services.AddScoped<ILoggedUserService, LoggedUserService>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(_appsettings.ConnectionStrings.Identity);
+                options
+                    .UseSqlServer(_appsettings.ConnectionStrings.Identity);
+                    
             }, ServiceLifetime.Scoped);
 
             services.AddCors(options =>
@@ -112,15 +123,6 @@ namespace IdentityServer.API
             })
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders();
-
-            services.AddTransient<IJwtService, JwtService>();
-            services.AddScoped<ILoginService, LoginService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<ITenantService, TenantService>();
-            services.AddScoped<ILoggedUserService, LoggedUserService>();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAuth(_appsettings.JwtSettings);
 
