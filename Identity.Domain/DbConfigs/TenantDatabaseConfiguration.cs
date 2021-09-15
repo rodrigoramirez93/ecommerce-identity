@@ -10,6 +10,10 @@ namespace Identity.Domain.DbConfigs
         public void Configure(EntityTypeBuilder<Tenant> builder)
         {
             builder.ToTable(Tables.Tenant);
+
+            builder.HasMany(x => x.Users)
+                .WithOne(x => x.DefaultTenant)
+                .HasForeignKey(x => x.DefaultTenantId);
         }
     }
 }

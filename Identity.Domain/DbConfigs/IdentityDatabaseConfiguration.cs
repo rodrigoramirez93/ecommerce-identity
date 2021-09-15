@@ -1,4 +1,5 @@
 ﻿using Identity.Domain.Model;
+using Identity.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using static Shared.Infrastructure.Core.Constants;
@@ -43,8 +44,6 @@ namespace Identity.Domain.DbConfigs
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable(Tables.User);
-
-            builder.Property(x => x.TenantId).HasColumnName("DefaultTenantId");
         }
     }
 

@@ -17,5 +17,6 @@ namespace Identity.Domain.Models
         public DateTime? DateDeleted { get; set; }
         public int? DeletedBy { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }

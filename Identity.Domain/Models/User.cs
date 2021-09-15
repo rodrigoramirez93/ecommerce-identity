@@ -6,18 +6,18 @@ using System.Collections.Generic;
 
 namespace Identity.Domain.Model
 {
-    public class User : IdentityUser<int>, IAuditable, ITrackable
+    public class User : IdentityUser<int>, IAuditable
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public int TenantId { get; set; }
-        public Tenant Tenant { get; set; }
-        public DateTime? DateCreated { get; set; }
         public int CreatedBy { get; set; }
-        public DateTime? DateUpdated { get; set; }
         public int? UpdatedBy { get; set; }
-        public DateTime? DateDeleted { get; set; }
         public int? DeletedBy { get; set; }
+        public int? DefaultTenantId { get; set; }
+        public DateTime? DateCreated { get; set; }
+        public DateTime? DateDeleted { get; set; }
+        public DateTime? DateUpdated { get; set; }
+        public Tenant DefaultTenant { get; set; }
         public virtual IList<UserRole> UsersRoles { get; set; }
     }
 }
