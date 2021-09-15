@@ -14,13 +14,11 @@ namespace Identity.Core.Dto
     public class UpdateRoleDto
     {
         public string Name { get; set; }
-        public int TenantId { get; set; }
     }
 
     public class CreateRoleDto
     {
         public string Name { get; set; }
-        public int TenantId { get; set; }
     }
 
     public class AccessDto

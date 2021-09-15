@@ -59,9 +59,6 @@ namespace Identity.BusinessLogic.Services
         public async Task<IdentityResult> CreateAsync(CreateRoleDto roleDto)
         {
             var role = _mapper.Map<Role>(roleDto);
-
-            var tenant = await _unitOfWork.Tenants.ReadAsync(role.TenantId);
-            tenant.MustExist(nameof(Constants.EntityNames.Tenants), role.TenantId);
             
             role.SetAuditInformationCreate(_loggedUser.Id);
             return await _roleManager.CreateAsync(role);
@@ -135,7 +132,6 @@ namespace Identity.BusinessLogic.Services
             var roleToUpdate = await _roleManager.FindByIdAsync(roleId.ToString());
             roleToUpdate.MustExist(nameof(Constants.EntityNames.Role), roleId);
             roleToUpdate.Name = roleDto.Name;
-            roleToUpdate.TenantId = roleDto.TenantId;
             roleToUpdate.SetAuditInformationUpdate(_loggedUser.Id);
             return await _roleManager.UpdateAsync(roleToUpdate);
         }
