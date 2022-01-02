@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Identity.Test
 {
+    [Trait("RunOnBuild", "true")]
     public class AutoMapperTest
     {
         [Fact]
