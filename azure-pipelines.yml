@@ -39,10 +39,46 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'test'
+    projects: '**/*test.csproj'
+    publishTestResults: true
+    arguments: --no-build --configuration $(buildConfiguration) --collect:"XPlat Code Coverage" --filter RunOnBuild=true
+  displayName: 'Run Tests'
+  continueOnError: false 
+
+# Merge all coverage reports into a single one using reportgenerator
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Agent.TempDirectory)/CoverageReport -reporttypes:Cobertura
+  displayName: 'Merge multiple code coverage reports into a single one'
+
+# Publishing code coverage so azure devops can display the report 
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/CoverageReport/Cobertura.xml'
+  displayName: 'Publish code coverage results'
+
+# Using powershell script to check the code coverage of Foundation.Utility project. Asserting is not less than 100%
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      cd $(Agent.TempDirectory)
+      $report = Get-ChildItem -Recurse -Filter "Cobertura.xml"
+      $coverage =  Select-Xml -Path $report.PSPath -XPath "*/packages/*[@name='Identity.BusinessLogic']" |% {[decimal]::Parse($_.Node.Attributes['branch-rate'].Value) * 100}
+      Write-Output "Identity.BusinessLogic code coverage ([int]$coverage)"
+      if ($coverage -lt ${env:ECOMMERCE_TEST_THRESHOLD})
+      {
+        Write-Output "Identity.BusinessLogic expected code coverage: $([int]${env:ECOMMERCE_TEST_THRESHOLD}). Actual: $([int]$coverage)"
+        throw;
+      }
+  displayName: 'Checking Identity.BusinessLogic has more than 0% code coverage'
+
 
 - task: DotNetCoreCLI@2
   inputs:
