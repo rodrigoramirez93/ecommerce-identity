@@ -39,6 +39,14 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+# Install report generator tool. This tool enable us to merge all code coverage reports into a single one
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.0.0
+  displayName: 'Install reportgenerator for code coverage'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
