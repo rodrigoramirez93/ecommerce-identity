@@ -7,13 +7,13 @@ resources:
   repositories:
   - repository: ecommerce-shared
     type: git
-    ref: develop
+    ref: master
     name: ecommerce/ecommerce-shared
     trigger:
-    - develop
+    - master
 
 trigger:
-- develop
+- master
 
 pool:
   vmImage: 'windows-latest'
