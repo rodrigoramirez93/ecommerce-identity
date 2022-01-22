@@ -1,4 +1,5 @@
 # syntax=docker/dockerfile:1
+# test
 FROM mcr.microsoft.com/dotnet/sdk:3.1-focal AS build-env
 WORKDIR /app
 
